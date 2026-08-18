@@ -1,0 +1,19 @@
+SQLite for Local Storage
+
+SQLite is a serverless, self-contained SQL database engine. The whole database is a single
+file on disk, there is no separate server process to install or configure, and it is the
+most widely deployed database engine in the world. Python includes it in the standard
+library as the sqlite3 module, so no extra dependency is needed.
+
+These properties make SQLite a good fit for a local RAG assistant. The documents, their
+text chunks and their embedding vectors all live in one portable file that can be copied
+between machines. It is cross-platform and works identically on Windows, macOS and Linux.
+
+A simple schema for RAG is a single table with four columns: an integer primary key, the
+source file name, the chunk text, and the embedding. Because SQLite has no native vector
+type, the vector is stored either as a JSON string or as a binary BLOB, and it is decoded
+back into numbers when the search runs.
+
+Basic operations are CREATE TABLE to define the schema, INSERT to add rows, SELECT to read
+them back and DROP TABLE to rebuild the index from scratch. Writing many rows inside one
+transaction with executemany is much faster than inserting them one by one.

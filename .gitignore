@@ -1,0 +1,9 @@
+# generated at runtime
+rag.db
+__pycache__/
+*.pyc
+
+# kept local: presentation material and the original assignment brief
+presentation/
+*.docx
+.DS_Store

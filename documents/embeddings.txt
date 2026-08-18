@@ -1,0 +1,21 @@
+Embeddings and Vector Search
+
+An embedding is a numeric vector representation of a piece of text that captures its
+meaning. Texts with a similar meaning get similar vectors, even when they use completely
+different words. This is what makes semantic search possible: instead of matching exact
+keywords, you compare vectors.
+
+The standard similarity measure is cosine similarity, which is the dot product of two
+vectors divided by the product of their lengths. If the vectors are normalised to unit
+length beforehand, cosine similarity is simply the dot product. The score is 1.0 for
+identical direction and 0.0 for unrelated text.
+
+In a RAG pipeline every document chunk is embedded once at ingestion time and stored. At
+query time only the question is embedded, and it is compared against every stored vector.
+For a few thousand chunks this brute-force scan in Python is fast enough. For millions of
+vectors you would use a dedicated vector index such as FAISS, sqlite-vec or a vector
+database, which use approximate nearest neighbour search.
+
+Choosing the right chunk size matters. Chunks that are too large dilute the vector with
+unrelated content, while chunks that are too small lose the context needed to answer.
+One to three paragraphs, roughly 500 to 1000 characters, is a good starting point.

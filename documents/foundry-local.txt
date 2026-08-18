@@ -1,0 +1,20 @@
+Microsoft Foundry Local
+
+Foundry Local is an end-to-end local AI solution from Microsoft. It provides a lightweight
+runtime and an SDK that run large language models completely on the user's own device.
+It ships with a curated catalog of optimised models that are downloaded and managed
+automatically by the runtime.
+
+No cloud account, no API key and no dedicated GPU are required. Foundry Local detects the
+available hardware and accelerates inference on CPU, GPU or NPU. Because inference happens
+on the device, applications built with Foundry Local work with zero network calls, which
+means the data in a prompt never leaves the machine.
+
+Supported platforms are Windows, macOS and Linux. The service is started with the command
+"foundry service start" and exposes an OpenAI-compatible REST endpoint on a local port,
+so any client that speaks the chat completions API can talk to it. Models are managed with
+"foundry model list", "foundry model run <alias>" and "foundry cache list".
+
+Typical small models used for local applications are Phi-4-mini, Phi-3.5-mini and
+Qwen2.5 in the 0.5B to 4B parameter range. Smaller models answer faster, larger models
+answer more accurately, so the choice is a trade-off between latency and quality.

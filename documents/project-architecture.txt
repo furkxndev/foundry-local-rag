@@ -1,0 +1,22 @@
+Architecture of the Local RAG Assistant
+
+The application has four layers and every one of them runs on a single machine.
+
+The client layer is a web page served locally. It has a text box for the question, shows
+the answer and lists the source passages that were used, together with their similarity
+scores.
+
+The application layer is a small Python HTTP server. It exposes three endpoints: a status
+endpoint that reports the index size and the loaded model, an ingest endpoint that rebuilds
+the index, and an ask endpoint that runs the RAG pipeline for one question.
+
+The data layer is a SQLite file called rag.db. It holds one row per document chunk with
+the source file name, the chunk text and its embedding vector.
+
+The AI layer is Microsoft Foundry Local. It hosts the chat model on the device and answers
+requests over a local OpenAI-compatible REST endpoint.
+
+The request flow is: the user asks a question, the server embeds the question, scores it
+against every stored vector with cosine similarity, takes the top three chunks, builds an
+augmented prompt from them and sends it to the local model. The generated answer and the
+sources are returned to the browser. No request ever leaves the device.

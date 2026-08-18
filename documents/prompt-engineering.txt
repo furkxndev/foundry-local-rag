@@ -1,0 +1,20 @@
+Prompt Engineering for Question Answering
+
+Retrieving the right passages is only half of the job. How the passages are presented to
+the model decides the quality of the answer. Chat models take a list of messages with
+roles. The system message defines the behaviour and the rules, the user message carries
+the retrieved context and the actual question.
+
+Three instructions matter most for a document assistant. First, restrict the model to the
+supplied context: "Answer using only the context passages below." Second, define a
+fallback for missing information: "If the context does not contain the answer, say you
+don't know." Without this rule the model falls back on its training data and hallucinates.
+Third, ask for citations: "Cite the source file name in brackets", so every claim can be
+verified against the original document.
+
+Controlling the format is equally useful. Asking for two to four sentences prevents long
+rambling answers, and a low temperature such as 0.2 makes the output more deterministic
+and repeatable, which is what you want for factual question answering.
+
+A good test suite contains both answerable and unanswerable questions. The unanswerable
+ones prove that the fallback rule works and that the assistant does not invent facts.

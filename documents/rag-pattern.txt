@@ -1,0 +1,19 @@
+Retrieval-Augmented Generation (RAG)
+
+RAG is an AI design pattern with three steps. Retrieve: find the passages of your own
+documents that are relevant to the user's question. Augment: add those passages to the
+prompt as context. Generate: let the language model write the answer from that context.
+
+The main benefit of RAG is grounding. A general language model only knows what it saw
+during training, so it invents plausible but wrong answers when asked about private or
+recent information. This is called hallucination. By putting the real source text into the
+prompt, RAG makes answers accurate, up to date and traceable, because the assistant can
+cite the document each fact came from.
+
+RAG is cheaper and faster than fine-tuning. Fine-tuning changes the weights of the model
+and has to be repeated whenever the data changes. With RAG you simply re-index the
+documents, and the same model immediately answers from the new content.
+
+A minimal RAG system needs four parts: a document store, an embedding model, a vector
+search function and a chat model. Common tuning decisions are the chunk size, how many
+chunks to retrieve (top-K, usually 3 to 5) and the wording of the system prompt.
